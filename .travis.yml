@@ -1,4 +1,16 @@
 language: generic
+
+sudo: required
+
+services:
+  - docker
   
+install:
+  - docker pull mkacz/buildenv
+  - CONTAINER=$(docker run -d --publish=22:22 mkacz/buildenv)
+  - docker ps
+  - CONTAINER_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CONTAINER)
+  - echo Container IP: $CONTAINER_IP
+
 script:
-  - whoami
+  - ssh build@$CONTAINER_IP whoami
