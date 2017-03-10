@@ -6,8 +6,8 @@ services:
   - docker
   
 install:
-  - docker pull mkacz/buildenv
-  - CONTAINER=$(docker run -d --publish=22:22 mkacz/buildenv)
+  - docker pull mkacz/buildenv:initial
+  - CONTAINER=$(docker run -d --publish=22:22 mkacz/buildenv:initial)
   - docker ps
   - CONTAINER_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CONTAINER)
   - echo Container IP: $CONTAINER_IP
