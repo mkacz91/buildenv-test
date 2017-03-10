@@ -7,10 +7,10 @@ services:
   
 install:
   - docker pull mkacz/buildenv:initial
-  - CONTAINER=$(docker run -d --publish=22:22 mkacz/buildenv:initial)
+  - CONTAINER=$(docker run -d --publish=2222:22 mkacz/buildenv:initial)
   - docker ps
   - CONTAINER_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CONTAINER)
   - echo Container IP: $CONTAINER_IP
 
 script:
-  - ssh build@$CONTAINER_IP whoami
+  - ssh build@$CONTAINER_IP:2222 whoami
